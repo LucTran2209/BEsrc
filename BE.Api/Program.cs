@@ -1,4 +1,5 @@
-
+using BE.Persistence.DependencyInjections;
+using BE.Persistence.Extensions;
 namespace BE.Api
 {
     public class Program
@@ -14,6 +15,9 @@ namespace BE.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // # DI PersistenceService
+            builder.Services.AddPersistenceServices(builder.Configuration);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -22,6 +26,8 @@ namespace BE.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.MigrationDataBase();
 
             app.UseHttpsRedirection();
 

@@ -6,4 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BE.Domain\BE.Domain.csproj" />
+    <ProjectReference Include="..\BE.Infrastructure\BE.Infrastructure.csproj" />
+    <ProjectReference Include="..\BE.Persistence\BE.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

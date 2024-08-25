@@ -1,14 +1,20 @@
 ﻿using BE.Domain.Abstractions.IEntities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BE.Domain.Abstractions
 {
-    public abstract class EntityAuditBase<Tkey> : EntityBase<Tkey>, IEntityAuditBase<Tkey>
+    public abstract class EntityAuditBase : IUserTracking<Guid>, IDateTracking, ISoftDelete
     {
-        public DateTimeOffset CreatedDate { get; set; }
-        public DateTimeOffset? LastModifiedDate { get; set; }
-        public Guid CreatedBy { get; set; }
-        public Guid? ModifiedBy { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTimeOffset? DeletedAt { get; set; }
+        public Guid CreatedBy { get ; set ; }
+        public string? CreatedByName { get ; set ; }
+        public Guid ModifiedBy { get ; set ; }
+        public string? ModifiedByName { get ; set ; }
+        public DateTimeOffset CreatedDate { get ; set ; }
+        public DateTimeOffset? LastModifiedDate { get ; set ; }
+        public bool IsDeleted { get ; set ; }
     }
 }

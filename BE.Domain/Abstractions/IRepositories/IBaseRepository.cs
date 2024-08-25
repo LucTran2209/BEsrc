@@ -1,30 +1,30 @@
 ﻿namespace BE.Domain.Abstractions.IRepositories
 {
-    public interface IRepositoryBase<TEntity, in TKey> where TEntity : class
+    public interface IBaseRepository<TEntity, in TKey> where TEntity : class
     {
         /// <summary>
         /// Find Entity by its Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<TEntity> FindByIdAsync(TKey id);
+        public Task<TEntity> FindByIdAsync(TKey id);
 
         /// <summary>
         /// Add a Entity to Database
         /// </summary>
         /// <param name="entity"></param>
-        void Insert(TEntity entity);
+        public void Insert(TEntity entity);
 
         /// <summary>
         /// Update data of Entity
         /// </summary>
         /// <param name="entity"></param>
-        void Update(TEntity entity);
+        public void Update(TEntity entity);
 
         /// <summary>
         /// Deactive a Entity
         /// </summary>
         /// <param name="entity"></param>
-        void Delete(TEntity entity);
+        public void Delete(TEntity entity);
     }
 }
