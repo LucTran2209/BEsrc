@@ -1,15 +1,12 @@
-﻿using BE.Domain.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BE.Domain.Entities.Roles;
+using BE.Domain.Entities.Users;
 
 namespace BE.Domain.Abstractions.UnitOfWork
 {
     public interface IUnitOfWork
     {
         public IUserRepository UserRepository { get; }
+        public IRoleRepository RoleRepository { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using BE.Application.Extensions;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace BE.Application.Behaviors;

@@ -1,5 +1,8 @@
+using BE.Api.Middlewares;
 using BE.Persistence.DependencyInjections;
+using BE.Application.DependencyInjections;
 using BE.Persistence.Extensions;
+using BE.Api.Extensions;
 namespace BE.Api
 {
     public class Program
@@ -18,6 +21,11 @@ namespace BE.Api
             // # DI PersistenceService
             builder.Services.AddPersistenceServices(builder.Configuration);
 
+            // # DI ApplicationService
+            builder.Services.AddApplicationServices();
+
+            builder.Services.AddScoped<ExceptionHandlingMiddleware>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,6 +39,8 @@ namespace BE.Api
 
             app.UseHttpsRedirection();
 
+            app.UseMiddlewares();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

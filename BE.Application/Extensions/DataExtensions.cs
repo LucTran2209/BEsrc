@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BE.Application.Models;
-using BE.Domain.Interfaces;
 using System.Linq.Expressions;
+using BE.Domain.Abstractions;
+using BE.Domain.Abstractions.IEntities;
 
 namespace BE.Application.Extensions;
 
 public static class DataExtensions
 {
 	public static IQueryable<T> ToPageList<T>(this IQueryable<T> query, PagedResultRequestModel filter)
-		where T : IEntity
+		where T : EntityAuditBase
 	{
 		int pageIndex = filter.PageIndex ?? 0;
 		pageIndex = pageIndex <= 1 ? 0 : pageIndex - 1;
@@ -36,8 +37,8 @@ public static class DataExtensions
 		int count,
 		PagedResultRequestModel filter,
 		Expression<Func<T, Y>> mapping)
-		where T : IEntity
-		where Y : class
+		where T : EntityAuditBase
+        where Y : class
 	{
 		return new PagedResultModel<Y>
 		{
@@ -49,8 +50,8 @@ public static class DataExtensions
 	}
 
 	public static IQueryable<T> Filter<T>(this IQueryable<T> query, string? filter, Expression<Func<T, bool>> predicate)
-		where T : IEntity
-	{
+		where T : EntityAuditBase
+    {
 		if (string.IsNullOrWhiteSpace(filter))
 		{
 			return query;
@@ -59,7 +60,7 @@ public static class DataExtensions
 	}
 
 	public static IQueryable<T> Filter<T>(this IQueryable<T> query, int? filter, Expression<Func<T, bool>> predicate)
-		where T : IEntity
+		where T : EntityAuditBase
 	{
 		if (filter == null)
 		{
@@ -68,8 +69,8 @@ public static class DataExtensions
 		return query.Where(predicate);
 	}
 	public static IQueryable<T> Filter<T>(this IQueryable<T> query, long? filter, Expression<Func<T, bool>> predicate)
-		where T : IEntity
-	{
+		where T : EntityAuditBase
+    {
 		if (filter == null)
 		{
 			return query;
@@ -78,7 +79,7 @@ public static class DataExtensions
 	}
 
 	public static IQueryable<T> Filter<T>(this IQueryable<T> query, decimal? filter, Expression<Func<T, bool>> predicate)
-		where T : IEntity
+		where T : EntityAuditBase
 	{
 		if (filter == null)
 		{
@@ -87,9 +88,9 @@ public static class DataExtensions
 		return query.Where(predicate);
 	}
 
-	public static async Task<T?> GetById<T>(this IQueryable<T> query, long id)
-		where T : IEntity
+	public static async Task<T?> GetById<T, Tkey>(this IQueryable<T> query, Tkey id)
+		where T : IEntityBase<Tkey>
 	{
-		return await query.FirstOrDefaultAsync(x => x.Id == id);
+		return await query.FirstOrDefaultAsync(x => x.Id.ToString() == id.ToString());
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using BE.Domain.Abstractions;
 using BE.Domain.Abstractions.IEntities;
 using BE.Domain.Abstractions.UnitOfWork;
+using BE.Domain.Entities.Roles;
 using BE.Domain.Entities.Users;
 using BE.Infrastructure.Repositories;
 using BE.Persistence;
@@ -21,15 +22,17 @@ namespace BE.Infrastructure.Common
             return _currentTransaction;
         }
 
-        public UnitOfWork(ApplicationDbContext context, ClaimsPrincipal claimsPrincipal)
+        public UnitOfWork(ApplicationDbContext context)
         {
-            this.context = context;
-            this.claimsPrincipal = claimsPrincipal;
+            this.context = context;          
         }
 
         // Interface Repository
         public IUserRepository userRepository;
         public IUserRepository UserRepository => userRepository = new UserRepository(context);
+
+        public IRoleRepository roleRepository;
+        public IRoleRepository RoleRepository => roleRepository = new RoleRepository(context);
 
         public async Task BeginTransactionAsync()
         {
