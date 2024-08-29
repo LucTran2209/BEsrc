@@ -9,6 +9,7 @@ namespace BE.Domain.Entities.Users
 {
     public interface IUserRepository : IBaseRepository<User, Guid>
     {
-        
+        IQueryable<User> GetAll();
+        void InsertUserRole(Guid  userId, int roleId);
     }
 }

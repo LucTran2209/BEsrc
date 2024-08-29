@@ -21,9 +21,10 @@ namespace BE.Application.Services.Users.Commands
         public async Task<int> Handle(InsertUserCommand request, CancellationToken cancellationToken)
         {
             var user = request.ToEntity();
+            user.Id = new Guid();
             unitOfWork.UserRepository.Insert(user);
-            await unitOfWork.SaveChangesAsync();
-            return 1;
+            unitOfWork.UserRepository.InsertUserRole(user.Id, request.RoleId);
+            return await unitOfWork.SaveChangesAsync();
         }
     }
 }
