@@ -24,7 +24,7 @@ namespace BE.Application.Services.Users.Commands
             user.Id = new Guid();
             unitOfWork.UserRepository.Insert(user);
             unitOfWork.UserRepository.InsertUserRole(user.Id, request.RoleId);
-            return await unitOfWork.SaveChangesAsync();
+            return await unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

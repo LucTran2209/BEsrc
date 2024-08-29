@@ -22,8 +22,4 @@
     <ProjectReference Include="..\BE.Domain\BE.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DependencyInjections\Options\" />
-  </ItemGroup>
-
 </Project>

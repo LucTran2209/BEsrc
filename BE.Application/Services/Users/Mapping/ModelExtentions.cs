@@ -29,7 +29,7 @@ namespace BE.Application.Services.Users.Mapping
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 UserName = user.UserName,
-                Role = user.UserRoles.FirstOrDefault(r => !r.IsDeleted).Role.RoleName
+                Role = user.UserRoles.FirstOrDefault(r => !r.IsDeleted).Role?.RoleName ?? string.Empty
             };
         }
 
