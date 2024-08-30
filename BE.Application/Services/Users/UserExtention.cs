@@ -1,16 +1,16 @@
-﻿using BE.Application.Services.Users.Commands.Requests;
-using BE.Application.Services.Users.Queries.Dtos;
+﻿using BE.Application.Services.Users.UserServiceInputDto;
+using BE.Application.Services.Users.UserServiceOutputDto;
 using BE.Domain.Entities.Users;
 
-namespace BE.Application.Services.Users.Mapping
+namespace BE.Application.Services.Users
 {
-    public static class ModelExtentions
+    public static class UserExtention
     {
-        public static User ToEntity(this InsertUserCommand command)
+        public static User ToEntity(this CreateUserInputDto command)
         {
             var user = new User();
             user.PhoneNumber = command.PhoneNumber;
-            user.UserName = command.UserName;   
+            user.UserName = command.UserName;
             user.Email = command.Email;
             user.DateOfBirth = command.DateOfBirth;
             user.Gender = command.Gender;
@@ -18,9 +18,9 @@ namespace BE.Application.Services.Users.Mapping
             return user;
         }
 
-        public static UserPageListDto ToDto(this User user)
+        public static GetListUserOutputDto ToDto(this User user)
         {
-            return new UserPageListDto
+            return new GetListUserOutputDto
             {
                 Id = user.Id,
                 DateOfBirth = user.DateOfBirth,
@@ -32,7 +32,5 @@ namespace BE.Application.Services.Users.Mapping
                 Role = user.UserRoles.FirstOrDefault(r => !r.IsDeleted).Role?.RoleName ?? string.Empty
             };
         }
-
-
     }
 }

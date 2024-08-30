@@ -1,8 +1,6 @@
-using BE.Application.Services.Users.Commands.Requests;
-using BE.Application.Services.Users.Queries.Requests;
-using MediatR;
+using BE.Application.Abstractions.ServiceInterfaces;
+using BE.Application.Services.Users.UserServiceInputDto;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BE.Api.Controllers
 {
@@ -11,26 +9,33 @@ namespace BE.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly IMediator mediator;
+        private readonly IUserService userService;
 
-        public UserController(ILogger<UserController> logger, IMediator mediator)
+        public UserController(ILogger<UserController> logger, IUserService userService)
         {
             _logger = logger;
-            this.mediator = mediator;
+            this.userService = userService;
         }
 
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll([FromQuery] UserPageListRequest request)
-        {
-            var res = await mediator.Send(request);
-            return Ok(res);
-        }
+        //[HttpGet("GetAll")]
+        //public async Task<IActionResult> GetAll([FromQuery] UserPageListRequest request)
+        //{
+        //    var res = await userService.Send(request);
+        //    return Ok(res);
+        //}
 
         [HttpPost]
-        public async Task<IActionResult> InsertAsync(InsertUserCommand command)
+        public async Task<IActionResult> InsertAsync([FromBody] CreateUserInputDto inputDto)
         {
-            await mediator.Send(command);
-            return Ok();
+            var output = await userService.CreateAsync(inputDto);
+            return Created(output.StatusCode, output);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetListAsync([FromQuery] GetListUserInputDto inputDto)
+        {
+            var output = await userService.GetListUserAsync(inputDto);
+            return Ok(output);
         }
     }
 }

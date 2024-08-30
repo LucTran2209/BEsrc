@@ -1,20 +1,18 @@
-﻿using FluentValidation.Results;
-using BE.Infrastructure;
-using System.Security.Claims;
+﻿using BE.Persistence;
 using FluentValidation;
-using BE.Persistence;
+using FluentValidation.Results;
 
-namespace BE.Application;
+namespace BE.Application.Abstractions;
 
-public class ValidatorBase<T> : AbstractValidator<T> where T : class
+public abstract class ValidatorBase<T> : AbstractValidator<T> where T : class
 {
     protected readonly ApplicationDbContext Context;
     //protected readonly ClaimsPrincipal User;
 
     public ValidatorBase(ApplicationDbContext context)
     {
-        this.Context = context;
-       // this.User = principal;
+        Context = context;
+        // this.User = principal;
     }
 
     protected override void RaiseValidationException(ValidationContext<T> context, ValidationResult result)

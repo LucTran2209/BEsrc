@@ -6,7 +6,7 @@ public class PagedResultRequestModel
 
     public int? PageIndex { get; set; }
 
-    public string? Search { get; set; }
+    public string Search { get; set; } = string.Empty;
 
     public string? OrderBy { get; set; } = string.Empty;
 

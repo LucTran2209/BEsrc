@@ -26,6 +26,16 @@ namespace BE.Api
 
             builder.Services.AddScoped<ExceptionHandlingMiddleware>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,14 +46,11 @@ namespace BE.Api
             }
 
             app.MigrationDataBase();
-
             app.UseHttpsRedirection();
-
             app.UseMiddlewares();
             app.UseAuthentication();
             app.UseAuthorization();
-
-
+            app.UseCors();
             app.MapControllers();
 
             app.Run();
