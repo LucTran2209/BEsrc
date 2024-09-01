@@ -2,6 +2,7 @@
 using BE.Domain.Abstractions.IEntities;
 using BE.Domain.Abstractions.UnitOfWork;
 using BE.Domain.Entities.Roles;
+using BE.Domain.Entities.Rooms;
 using BE.Domain.Entities.Users;
 using BE.Infrastructure.Repositories;
 using BE.Persistence;
@@ -34,6 +35,8 @@ namespace BE.Infrastructure.Common
         public IRoleRepository roleRepository;
         public IRoleRepository RoleRepository => roleRepository = new RoleRepository(context);
 
+        public IRoomRepository roomRepository;
+        public IRoomRepository RoomRepository => roomRepository = new RoomRepository(context);
         public async Task BeginTransactionAsync()
         {
             if (_currentTransaction == null)

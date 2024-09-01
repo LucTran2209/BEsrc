@@ -13,6 +13,9 @@ namespace BE.Persistence.Common
         internal const string UserRoles = nameof(UserRoles);
         internal const string RefreshTokens = nameof(RefreshTokens);
 
+        //Room
+        internal const string Rooms = nameof(Rooms);
+
         // Table Business
         internal const string Products = nameof(Products);
     }
