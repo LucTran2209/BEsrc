@@ -1,6 +1,35 @@
-﻿namespace BE.Api.Controllers
+﻿using BE.Application.Abstractions.ServiceInterfaces;
+using BE.Application.Services.Rooms.RoomServiceInputDto;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BE.Api.Controllers
 {
-	public class RoomController
+	[Route("[controller]")]
+	[ApiController]
+	public class RoomController : ControllerBase
 	{
+		private readonly ILogger<RoomController> logger;
+		private readonly IRoomService roomService;
+
+		public RoomController(ILogger<RoomController> logger, IRoomService roomService)
+		{
+			this.logger = logger;
+			this.roomService = roomService;
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> InsertAsync([FromBody] CreateRoomInputDto inputDto)
+		{
+			var output = await roomService.CreateAsync(inputDto);
+			return Created(output.StatusCode, output);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetListAsync([FromQuery] GetListRoomInputDto inputDto)
+		{
+			var output = await roomService.GetListRoomAsync(inputDto);
+			return Ok(output);
+		}
 	}
 }

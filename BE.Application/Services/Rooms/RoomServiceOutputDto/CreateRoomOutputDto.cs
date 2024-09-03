@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE.Application.Services.Rooms.RoomServiceOutputDto
 {
-	internal class CreateRoomOutputDto
+	public class CreateRoomOutputDto
 	{
 	}
 }

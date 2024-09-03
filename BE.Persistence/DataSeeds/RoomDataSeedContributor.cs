@@ -19,23 +19,26 @@ public class RoomDataSeedContributor : IDataSeedContributor
 
 	public async Task SeedAsync()
 	{
-		// Kiểm tra xem có phòng nào với RoomName cụ thể không
-		var roomName = "Room A101";
-		var room = await context.Rooms.SingleOrDefaultAsync(r => r.RoomName == roomName);
+		if (await context.Rooms.AnyAsync()) return;
 
-		if (room == null)
-		{
-			// Nếu phòng chưa tồn tại, tạo phòng mới
-			room = new Room()
+		IList<Room> rooms = new List<Room>()
 			{
-				Id = Guid.NewGuid(),
-				RoomName = roomName,
-				RoomDescription = "Lecture room on the first floor",
-			};
+				new Room
+				{
+					Id = Guid.NewGuid(),
+					RoomName = "BE-206",
+					RoomType = "Classroom",
+					Capacity = 30,
+					Floor = 2,
+					IsAvailable = true,
+					Area = 25.5m,
+					Equipment = "Projector, Board",
+					Image = "BE-206.png",
+					Notes = "Near the main entrance"
+				}
+            };
 
-			await context.Rooms.AddAsync(room);
-		}
-
+		await context.Rooms.AddRangeAsync(rooms);
 		await context.SaveChangesAsync();
 	}
 }

@@ -24,9 +24,36 @@ namespace BE.Persistence.ConfigurationTables
 				   .IsRequired()
 				   .HasMaxLength(50);
 
-			builder.Property(x => x.RoomDescription)
-				   .HasMaxLength(200);
+			builder.Property(x => x.RoomType)
+				   .IsRequired()
+				   .HasMaxLength(25); 
 
+			builder.Property(x => x.Capacity)
+				   .IsRequired();
+
+			builder.Property(x => x.Floor)
+				   .IsRequired();
+
+			builder.Property(x => x.IsAvailable)
+				   .IsRequired();
+
+			builder.Property(x => x.Area)
+				   .IsRequired()
+				   .HasColumnType("decimal(5, 2)"); 
+
+			builder.Property(x => x.Equipment)
+				   .HasMaxLength(int.MaxValue); 
+
+			builder.Property(x => x.Image)
+				   .HasMaxLength(int.MaxValue); 
+
+			builder.Property(x => x.Notes)
+				   .HasMaxLength(int.MaxValue); 
+
+			// Set Foreign Key
+			//builder.HasOne(x => x.Building)
+			//	   .WithMany(b => b.Rooms) // Assuming the Building entity has a collection of Rooms
+			//	   .HasForeignKey(x => x.BuildingId);
 
 		}
 	}

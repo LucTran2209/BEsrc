@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace BE.Application.Services.Rooms.RoomServiceOutputDto
 {
-	internal class GetListRoomOutputDto
+	public class GetListRoomOutputDto
 	{
+		public Guid Id { get; set; }
+		public string RoomName { get; set; }
+		public string RoomType { get; set; }
+		public int Capacity { get; set; }
+		public int Floor { get; set; }
+		public bool IsAvailable { get; set; }
+		public decimal Area { get; set; }
+		public string Equipment { get; set; }
+		public string Image { get; set; }
+		public string Notes { get; set; }
 	}
 }
