@@ -39,8 +39,6 @@ namespace BE.Application.Services.Building
                 StatusCode = HttpStatusCode.Created.ToString(),
                 Message = "Success"
             };
-
-
         }
 
         public async Task<ResultService> DeleteBuilding(DeleteBuildingInputDto inputDto)
@@ -68,7 +66,7 @@ namespace BE.Application.Services.Building
             var res = await query.OrderBy(inputDto.OrderBy, inputDto.OrderByDesc)
                                                 .ThenBy(inputDto.ThenBy, inputDto.ThenByDesc)
                                                 .ToPageList(inputDto)
-                                                .ToPageResult(await query.CountAsync(), inputDto, b => BuildingExtentionHelpers.ToDto(b));
+                                                .ToPageResult(await query.CountAsync(), inputDto, b => BuildingExtention.ToDto(b));
 
             return new ResultService
             {
@@ -84,26 +82,15 @@ namespace BE.Application.Services.Building
 
             await updateBuildingValidator.ValidateAndThrowAsync(inputDto);
 
-            //var build = inputDto.UpdateBuildingToEntity();
             var build = await unitOfWork.BuildingRepository.FindByIdAsync(inputDto.Id);
+
+            build.UpdateBuildingToEntity(inputDto);
+
             if (build != null)
             {
-                build.BuildingName = inputDto.BuildingName;
-                build.BuildingType = inputDto.BuildingType;
-                build.Address = inputDto.Address;
-                build.NumberOfFloor = inputDto.NumberOfFloor;
-                build.ContactNumber = inputDto.ContactNumber;
-                build.YearConstucted = inputDto.YearConstucted;
-                build.ManagerName = inputDto.ManagerName;
-                build.Notes = inputDto.Notes;
-                build.IsValiable = inputDto.IsValiable;
-                build.Image = inputDto.Image;
-                build.Capacity = inputDto.Capacity;
-                build.EmergencyContact = inputDto.EmergencyContact;
                 unitOfWork.BuildingRepository.Update(build);
                 await unitOfWork.SaveChangesAsync();
             }
-
 
             return new ResultService
             {

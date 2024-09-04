@@ -2,7 +2,7 @@
 using BE.Application.Services.Building.BuildingServiceOutputDto;
 using BE.Domain.Entities.Building;
 
-public static class BuildingExtentionHelpers
+public static class BuildingExtention
 {
     public static Building ToEntity(this CreateBuildingInputDto command)
     {
@@ -20,6 +20,23 @@ public static class BuildingExtentionHelpers
         build.Capacity = command.Capacity;
         build.EmergencyContact = command.EmergencyContact;
         return build;
+    }
+    public static void UpdateBuildingToEntity(this Building building, UpdateBuildingInputDto command)
+    {
+
+        building.BuildingName = command.BuildingName;
+        building.BuildingType = command.BuildingType;
+        building.Address = command.Address;
+        building.NumberOfFloor = command.NumberOfFloor;
+        building.ContactNumber = command.ContactNumber;
+        building.YearConstucted = command.YearConstucted;
+        building.ManagerName = command.ManagerName;
+        building.Notes = command.Notes;
+        building.IsValiable = command.IsValiable;
+        building.Image = command.Image;
+        building.Capacity = command.Capacity;
+        building.EmergencyContact = command.EmergencyContact;
+
     }
 
     public static GetListBuildingOutputDto ToDto(this Building building)
