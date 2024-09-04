@@ -100,7 +100,7 @@ namespace BE.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Bulding", (string)null);
+                    b.ToTable("Buldings", (string)null);
                 });
 
             modelBuilder.Entity("BE.Domain.Entities.Roles.Role", b =>

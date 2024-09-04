@@ -8,7 +8,7 @@
         internal const string RefreshTokens = nameof(RefreshTokens);
 
         //table Bulding
-        internal const string Bulding = nameof(Bulding);
+        internal const string Buldings = nameof(Buldings);
 
         // Table Business
         internal const string Products = nameof(Products);
