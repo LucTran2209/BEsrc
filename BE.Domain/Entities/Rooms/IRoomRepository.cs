@@ -12,7 +12,7 @@ namespace BE.Domain.Entities.Rooms
 
 		//Get All Room
 		IQueryable<Room> GetAll();
-		Task<Room> FindByIdAsync(int id);
+		new Task<Room> FindByIdAsync(int id);
 
 	}
 }
