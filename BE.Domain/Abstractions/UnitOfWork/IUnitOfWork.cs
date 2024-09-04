@@ -1,4 +1,5 @@
-﻿using BE.Domain.Entities.Roles;
+﻿using BE.Domain.Entities.Building;
+using BE.Domain.Entities.Roles;
 using BE.Domain.Entities.Users;
 
 namespace BE.Domain.Abstractions.UnitOfWork
@@ -7,6 +8,7 @@ namespace BE.Domain.Abstractions.UnitOfWork
     {
         public IUserRepository UserRepository { get; }
         public IRoleRepository RoleRepository { get; }
+        public IBuildingRepository BuildingRepository { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
