@@ -1,5 +1,6 @@
 ﻿using BE.Application.Abstractions.ServiceInterfaces;
 using BE.Application.Services.Rooms;
+using BE.Application.Services.Building;
 using BE.Application.Services.Users;
 using BE.Domain.Abstractions.UnitOfWork;
 using BE.Infrastructure.Common;
@@ -14,11 +15,11 @@ namespace BE.Application.DependencyInjections
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-      
+
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped(typeof(IRoomService), typeof(RoomService));
-
+            services.AddScoped(typeof(IBuildingSerivce), typeof(BuildingService));
             return services;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using BE.Domain.Abstractions;
 using BE.Domain.Abstractions.IEntities;
 using BE.Domain.Abstractions.UnitOfWork;
+using BE.Domain.Entities.Building;
 using BE.Domain.Entities.Roles;
 using BE.Domain.Entities.Rooms;
 using BE.Domain.Entities.Users;
@@ -13,7 +14,7 @@ using System.Security.Claims;
 
 namespace BE.Infrastructure.Common
 {
-    public class UnitOfWork : IUnitOfWork , IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ApplicationDbContext context;
         private readonly ClaimsPrincipal claimsPrincipal;
@@ -25,7 +26,7 @@ namespace BE.Infrastructure.Common
 
         public UnitOfWork(ApplicationDbContext context)
         {
-            this.context = context;          
+            this.context = context;
         }
 
         // Interface Repository
@@ -37,6 +38,10 @@ namespace BE.Infrastructure.Common
 
         public IRoomRepository roomRepository;
         public IRoomRepository RoomRepository => roomRepository = new RoomRepository(context);
+        
+        public IBuildingRepository buildingRepository;
+        public IBuildingRepository BuildingRepository => buildingRepository = new BuildingRepository(context);
+
         public async Task BeginTransactionAsync()
         {
             if (_currentTransaction == null)
@@ -141,6 +146,6 @@ namespace BE.Infrastructure.Common
         }
 
         public async void Dispose() => await context.DisposeAsync();
-        
+
     }
 }
