@@ -8,5 +8,10 @@ namespace BE.Application.Abstractions.ServiceInterfaces
 		Task<ResultService> CreateAsync(CreateRoomInputDto inputDto);
 
 		Task<ResultService> GetListRoomAsync(GetListRoomInputDto inputDto);
+
+		Task<ResultService> UpdateRoomAsync(UpdateRoomInputDto inputDto);
+
+		Task<ResultService> DeleteRoomAsync(Guid id); 
+
 	}
 }

@@ -13,10 +13,17 @@ namespace BE.Application.Services.Rooms
 {
 	public class RoomService : BaseService, IRoomService
 	{
+		//Validator
 		private readonly IValidator<CreateRoomInputDto> createRoomValidator;
-		public RoomService(IUnitOfWork unitOfWork, IValidator<CreateRoomInputDto> createRoomValidator) : base(unitOfWork)
+		private readonly IValidator<UpdateRoomInputDto> updateRoomValidator;
+
+		public RoomService(IUnitOfWork unitOfWork,
+						   IValidator<CreateRoomInputDto> createRoomValidator,
+						   IValidator<UpdateRoomInputDto> updateRoomValidator)
+			: base(unitOfWork)
 		{
 			this.createRoomValidator = createRoomValidator;
+			this.updateRoomValidator = updateRoomValidator;
 		}
 
 		public async Task<ResultService> CreateAsync(CreateRoomInputDto inputDto)
@@ -51,6 +58,64 @@ namespace BE.Application.Services.Rooms
 				StatusCode = HttpStatusCode.OK.ToString(),
 				Message = "Success",
 				Datas = res
+			};
+		}
+
+		public async Task<ResultService> UpdateRoomAsync(UpdateRoomInputDto inputDto)
+		{
+			await updateRoomValidator.ValidateAndThrowAsync(inputDto);
+
+			var room = await unitOfWork.RoomRepository.FindByIdAsync(inputDto.Id);
+
+			if (room == null)
+			{
+				return new ResultService
+				{
+					StatusCode = HttpStatusCode.NotFound.ToString(),
+					Message = "Room not found"
+				};
+			}
+			room.RoomName = inputDto.RoomName;
+			room.RoomType = inputDto.RoomType;
+			room.Capacity = inputDto.Capacity;
+			room.Floor = inputDto.Floor;
+			room.IsAvailable = inputDto.IsAvailable;
+			room.Area = inputDto.Area;
+			room.Equipment = inputDto.Equipment;
+			room.Image = inputDto.Image;
+			room.Notes = inputDto.Notes;
+
+			unitOfWork.RoomRepository.Update(room);
+			await unitOfWork.SaveChangesAsync();
+
+			return new ResultService
+			{
+				StatusCode = HttpStatusCode.OK.ToString(),
+				Message = "Room updated successfully"
+			};
+
+		}
+
+		public async Task<ResultService> DeleteRoomAsync(Guid id)
+		{
+			var room = await unitOfWork.RoomRepository.FindByIdAsync(id);
+
+			if (room == null)
+			{
+				return new ResultService
+				{
+					StatusCode = HttpStatusCode.NotFound.ToString(),
+					Message = "Room not found"
+				};
+			}
+
+			unitOfWork.RoomRepository.Delete(room);
+			await unitOfWork.SaveChangesAsync();
+
+			return new ResultService
+			{
+				StatusCode = HttpStatusCode.OK.ToString(),
+				Message = "Room deleted successfully"
 			};
 		}
 	}

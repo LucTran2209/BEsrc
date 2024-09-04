@@ -31,5 +31,31 @@ namespace BE.Api.Controllers
 			var output = await roomService.GetListRoomAsync(inputDto);
 			return Ok(output);
 		}
+
+		[HttpPut]
+		public async Task<IActionResult> UpdateAsync([FromBody] UpdateRoomInputDto inputDto)
+		{
+			var output = await roomService.UpdateRoomAsync(inputDto);
+
+			if (output.StatusCode == "NotFound")
+			{
+				return NotFound(output);
+			}
+
+			return Ok(output);
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteAsync(Guid id)
+		{
+			var output = await roomService.DeleteRoomAsync(id);
+
+			if (output.StatusCode == "NotFound")
+			{
+				return NotFound(output);
+			}
+
+			return Ok(output);
+		}
 	}
 }
