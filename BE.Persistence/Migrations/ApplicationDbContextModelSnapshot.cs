@@ -103,9 +103,11 @@ namespace BE.Persistence.Migrations
 
             modelBuilder.Entity("BE.Domain.Entities.Rooms.Room", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Area")
                         .HasPrecision(18, 2)

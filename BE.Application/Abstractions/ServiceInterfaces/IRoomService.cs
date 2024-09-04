@@ -11,7 +11,7 @@ namespace BE.Application.Abstractions.ServiceInterfaces
 
 		Task<ResultService> UpdateRoomAsync(UpdateRoomInputDto inputDto);
 
-		Task<ResultService> DeleteRoomAsync(Guid id); 
+		Task<ResultService> DeleteRoomAsync(int id); 
 
 	}
 }

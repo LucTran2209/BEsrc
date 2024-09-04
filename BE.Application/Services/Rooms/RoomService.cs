@@ -30,7 +30,6 @@ namespace BE.Application.Services.Rooms
 		{
 			await createRoomValidator.ValidateAndThrowAsync(inputDto);
 			var room = inputDto.ToEntity();
-			room.Id = new Guid();
 
 			unitOfWork.RoomRepository.Insert(room);
 			await unitOfWork.SaveChangesAsync();
@@ -96,7 +95,7 @@ namespace BE.Application.Services.Rooms
 
 		}
 
-		public async Task<ResultService> DeleteRoomAsync(Guid id)
+		public async Task<ResultService> DeleteRoomAsync(int id)
 		{
 			var room = await unitOfWork.RoomRepository.FindByIdAsync(id);
 

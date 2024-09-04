@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace BE.Domain.Entities.Rooms
 {
-	public interface IRoomRepository : IBaseRepository<Room, Guid>
+	public interface IRoomRepository : IBaseRepository<Room, int>
 	{
+
 		//Get All Room
 		IQueryable<Room> GetAll();
+		Task<Room> FindByIdAsync(int id);
 
 	}
 }

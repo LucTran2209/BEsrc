@@ -25,7 +25,7 @@ public class RoomDataSeedContributor : IDataSeedContributor
 			{
 				new Room
 				{
-					Id = Guid.NewGuid(),
+					Id = 1,
 					RoomName = "BE-206",
 					RoomType = "Classroom",
 					Capacity = 30,

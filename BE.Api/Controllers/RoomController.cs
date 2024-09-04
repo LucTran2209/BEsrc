@@ -46,7 +46,7 @@ namespace BE.Api.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteAsync(Guid id)
+		public async Task<IActionResult> DeleteAsync(int id)
 		{
 			var output = await roomService.DeleteRoomAsync(id);
 

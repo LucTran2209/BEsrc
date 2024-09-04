@@ -21,7 +21,7 @@ namespace BE.Infrastructure.Repositories
 			context.Rooms.Remove(entity);
 		}
 
-		public async Task<Room> FindByIdAsync(Guid id)
+		public async Task<Room> FindByIdAsync(int id)
 		{
 			var room = await context.Rooms.SingleOrDefaultAsync(r => r.Id == id);
 			return room;
