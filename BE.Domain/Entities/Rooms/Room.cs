@@ -1,5 +1,6 @@
 ﻿using BE.Domain.Abstractions;
 using BE.Domain.Abstractions.IEntities;
+using BE.Domain.Entities.Buildings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,8 @@ namespace BE.Domain.Entities.Rooms
 		public string Image { get; set; } = string.Empty;
 		public string Notes { get; set; } = string.Empty;
 
-		// Foreign key to Building entity
-		//public Guid BuildingId { get; set; } 
-
-		// Navigation property for the Building
-		//public virtual Building Building { get; set; } 
+		public int BuildingId { get; set; }
+		public virtual Building Building { get; set; }
 
 	}
 }

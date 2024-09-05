@@ -45,12 +45,17 @@ namespace BE.Persistence.ConfigurationTables
 				   .HasMaxLength(int.MaxValue); 
 
 			builder.Property(x => x.Notes)
-				   .HasMaxLength(int.MaxValue); 
+				   .HasMaxLength(int.MaxValue);
 
 			// Set Foreign Key
 			//builder.HasOne(x => x.Building)
 			//	   .WithMany(b => b.Rooms) // Assuming the Building entity has a collection of Rooms
 			//	   .HasForeignKey(x => x.BuildingId);
+
+			builder.HasOne(x => x.Building)
+				   .WithMany(b => b.Rooms) // Building có nhiều Rooms
+				   .HasForeignKey(x => x.BuildingId)
+				   .OnDelete(DeleteBehavior.Cascade);
 
 		}
 	}

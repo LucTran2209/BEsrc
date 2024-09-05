@@ -1,6 +1,6 @@
 ﻿using BE.Domain.Abstractions.IRepositories;
 
-namespace BE.Domain.Entities.Building
+namespace BE.Domain.Entities.Buildings
 {
     public interface IBuildingRepository : IBaseRepository<Building, int>
     {

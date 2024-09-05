@@ -8,6 +8,7 @@ namespace BE.Application.Services.Rooms.RoomServiceInputDto
 {
 	public class CreateRoomInputDto
 	{
+		public int BuildingId { get; set; }
 		public string RoomName { get; set; }
 		public string RoomType { get; set; }
 		public int Capacity { get; set; }
@@ -17,5 +18,6 @@ namespace BE.Application.Services.Rooms.RoomServiceInputDto
 		public string Equipment { get; set; }
 		public string Image { get; set; }
 		public string Notes { get; set; }
+
 	}
 }

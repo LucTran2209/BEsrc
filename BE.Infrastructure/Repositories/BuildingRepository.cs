@@ -1,4 +1,4 @@
-﻿using BE.Domain.Entities.Building;
+﻿using BE.Domain.Entities.Buildings;
 using BE.Infrastructure.Abstractions;
 using BE.Persistence;
 

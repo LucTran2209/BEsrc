@@ -8,6 +8,7 @@ namespace BE.Application.Services.Rooms.RoomServiceInputDto
 {
 	public class UpdateRoomInputDto
 	{
+		public int BuildingId { get; set; }
 		public int Id { get; set; } 
 		public string RoomName { get; set; }
 		public string RoomType { get; set; }

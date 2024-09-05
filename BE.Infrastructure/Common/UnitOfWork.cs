@@ -1,7 +1,7 @@
 ﻿using BE.Domain.Abstractions;
 using BE.Domain.Abstractions.IEntities;
 using BE.Domain.Abstractions.UnitOfWork;
-using BE.Domain.Entities.Building;
+using BE.Domain.Entities.Buildings;
 using BE.Domain.Entities.Roles;
 using BE.Domain.Entities.Rooms;
 using BE.Domain.Entities.Users;

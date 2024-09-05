@@ -74,6 +74,7 @@ namespace BE.Application.Services.Rooms
 					Message = "Room not found"
 				};
 			}
+			room.BuildingId = inputDto.BuildingId;
 			room.RoomName = inputDto.RoomName;
 			room.RoomType = inputDto.RoomType;
 			room.Capacity = inputDto.Capacity;
