@@ -9,6 +9,7 @@ namespace BE.Application.Services.Rooms
 		public static Room ToEntity(this CreateRoomInputDto command)
 		{
 			var room = new Room();
+			room.BuildingId = command.BuildingId;
 			room.RoomName = command.RoomName;
 			room.RoomType = command.RoomType;
 			room.Capacity = command.Capacity;
