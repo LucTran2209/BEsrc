@@ -1,4 +1,4 @@
-﻿using BE.Domain.Entities.Building;
+﻿using BE.Domain.Entities.Buildings;
 using BE.Persistence.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,7 +10,7 @@ namespace BE.Persistence.ConfigurationTables
         public void Configure(EntityTypeBuilder<Building> builder)
         {
             // Set Table Name
-            builder.ToTable(ConstantTableNames.Buldings);
+            builder.ToTable(ConstantTableNames.Buildings);
 
             //Set Primary Key
             builder.HasKey(x => x.Id);

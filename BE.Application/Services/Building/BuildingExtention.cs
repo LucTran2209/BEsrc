@@ -1,6 +1,6 @@
 ﻿using BE.Application.Services.Building.BuildingServiceInputDto;
 using BE.Application.Services.Building.BuildingServiceOutputDto;
-using BE.Domain.Entities.Building;
+using BE.Domain.Entities.Buildings;
 
 public static class BuildingExtention
 {

@@ -9,7 +9,7 @@
         //Room
         internal const string Rooms = nameof(Rooms);
         //table Bulding
-        internal const string Buldings = nameof(Buldings);
+        internal const string Buildings = nameof(Buildings);
         // Table Business
         internal const string Products = nameof(Products);
     }

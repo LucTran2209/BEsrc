@@ -22,7 +22,7 @@ namespace BE.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BE.Domain.Entities.Building.Building", b =>
+            modelBuilder.Entity("BE.Domain.Entities.Buildings.Building", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +100,7 @@ namespace BE.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Buldings", (string)null);
+                    b.ToTable("Buildings", (string)null);
                 });
 
             modelBuilder.Entity("BE.Domain.Entities.Roles.Role", b =>
@@ -194,6 +194,9 @@ namespace BE.Persistence.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(5, 2)");
 
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
@@ -250,6 +253,8 @@ namespace BE.Persistence.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BuildingId");
 
                     b.ToTable("Rooms", (string)null);
                 });
@@ -329,6 +334,22 @@ namespace BE.Persistence.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BE.Domain.Entities.Rooms.Room", b =>
+                {
+                    b.HasOne("BE.Domain.Entities.Buildings.Building", "Building")
+                        .WithMany("Rooms")
+                        .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Building");
+                });
+
+            modelBuilder.Entity("BE.Domain.Entities.Buildings.Building", b =>
+                {
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("BE.Domain.Entities.Roles.Role", b =>

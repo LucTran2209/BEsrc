@@ -1,7 +1,8 @@
 ﻿using BE.Domain.Abstractions;
 using BE.Domain.Abstractions.IEntities;
+using BE.Domain.Entities.Rooms;
 
-namespace BE.Domain.Entities.Building
+namespace BE.Domain.Entities.Buildings
 {
     public class Building : EntityAuditBase, IEntityBase<int>
     {
@@ -18,6 +19,7 @@ namespace BE.Domain.Entities.Building
         public string Image { get; set; }
         public int? IsValiable { get; set; }
         public string Notes { get; set; }
+		public virtual ICollection<Room> Rooms { get; set; } = new List<Room>();
 
-    }
+	}
 }
